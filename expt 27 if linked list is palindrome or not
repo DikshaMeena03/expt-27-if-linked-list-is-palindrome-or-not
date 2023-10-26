@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+// Declaration of a single Node
+class Node {
+public:
+        int data;
+        Node(int d){
+            data = d;
+        }
+        Node *ptr;
+};
+
+// Function that returns boolean value
+bool isPalin(Node* head){
+
+        // Temp pointer
+        Node* slow= head;
+
+        // Create a stack
+        stack <int> s;
+
+
+        // First traversal to push all the elements to stack
+        while(slow != NULL){
+                s.push(slow->data);
+                slow = slow->ptr;
+        }
+
+        // Second Traversal to compare the stack and node
+        while(head != NULL ){
+
+            int i=s.top();
+            s.pop();
+
+            // Compare data
+            if(head -> data != i){
+                return false;
+            }
+        head=head->ptr;
+        }
+
+return true;
+}
+
+// Driver Function
+int main(){
+    // Create nodes
+    Node one = Node(31);
+    Node two = Node(32);
+    Node three = Node(33);
+    Node four = Node(32);
+    Node five = Node(31);
+
+    // Connect all the nodes
+    five.ptr = NULL;
+    one.ptr = &two;
+    two.ptr = &three;
+    three.ptr = &four;
+    four.ptr = &five;
+    Node* temp = &one;
+
+ int result = isPalin(&one);
+
+    if(result == 1)
+            cout<<"The value is True\n";
+    else
+        cout<<"The value is False\n";
+
+return 0;
+}
